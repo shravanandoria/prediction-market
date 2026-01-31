@@ -1,8 +1,16 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { Filter, Search, ChevronDown } from "lucide-react";
+import { Filter, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const cryptoFilters = [
   { name: "All", active: true },
@@ -13,7 +21,7 @@ const cryptoFilters = [
 
 const timeHorizons = ["All", "1h", "4h", "24h"];
 const traderQualities = ["All", "New", "Verified", "High Win %"];
-const frequencies = ["All", "Hourly", "Daily", "Weekly"];
+const expires = ["All", "Hourly", "Daily", "Weekly"];
 const statuses = ["All", "Active", "Inactive", "Pending"];
 
 interface FilterDropdownProps {
@@ -30,23 +38,18 @@ function FilterDropdown({
   onChange,
 }: FilterDropdownProps) {
   return (
-    <div className="relative inline-block">
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="appearance-none bg-secondary/50 hover:bg-secondary text-foreground text-sm font-medium px-3 py-1.5 pr-8 rounded-md border border-border/50 cursor-pointer transition-all duration-200 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-primary/50"
-      >
-        <option value="" disabled hidden>
-          {label}
-        </option>
+    <Select value={value} onValueChange={onChange}>
+      <SelectTrigger className="w-auto bg-secondary/50 hover:bg-secondary text-foreground text-sm font-medium px-3 py-1.5 border-border/50 whitespace-nowrap">
+        <SelectValue placeholder={label} />
+      </SelectTrigger>
+      <SelectContent>
         {options.map((option) => (
-          <option key={option} value={option}>
+          <SelectItem key={option} value={option}>
             {option === "All" ? label : option}
-          </option>
+          </SelectItem>
         ))}
-      </select>
-      <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
-    </div>
+      </SelectContent>
+    </Select>
   );
 }
 
@@ -58,7 +61,7 @@ export function CryptoFilters() {
   const [showFilters, setShowFilters] = useState(true); // Default enabled
   const [timeHorizon, setTimeHorizon] = useState("All");
   const [traderQuality, setTraderQuality] = useState("All");
-  const [frequency, setFrequency] = useState("All");
+  const [Expiry, setExpiry] = useState("All");
   const [status, setStatus] = useState("All");
 
   const checkScroll = () => {
@@ -77,9 +80,9 @@ export function CryptoFilters() {
   }, []);
 
   return (
-    <div className="top-[104px] z-30 w-full border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
+    <div className="top-[104px] mt-5 z-30 w-full  bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
       {/* First Row - Crypto Filters */}
-      <div className="relative border-b border-border">
+      <div className="relative ">
         {/* Left Gradient Overlay */}
         {showLeftGradient && (
           <div className="absolute left-0 top-0 bottom-0 w-12 bg-linear-to-r from-background to-transparent z-10 pointer-events-none" />
@@ -166,12 +169,12 @@ export function CryptoFilters() {
               onChange={setTraderQuality}
             />
 
-            {/* Frequency Filter */}
+            {/* Expiry Filter */}
             <FilterDropdown
-              label="Frequency"
-              options={frequencies}
-              value={frequency}
-              onChange={setFrequency}
+              label="Expiry"
+              options={expires}
+              value={Expiry}
+              onChange={setExpiry}
             />
 
             {/* Status Filter */}
