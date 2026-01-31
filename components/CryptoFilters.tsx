@@ -11,7 +11,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
 
 const cryptoFilters = [
   { name: "All", active: true },
@@ -81,9 +80,9 @@ export function CryptoFilters() {
   }, []);
 
   return (
-    <div className="top-[104px] z-30 w-full border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
+    <div className="top-[104px] mt-5 z-30 w-full  bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
       {/* First Row - Crypto Filters */}
-      <div className="relative border-b border-border">
+      <div className="relative ">
         {/* Left Gradient Overlay */}
         {showLeftGradient && (
           <div className="absolute left-0 top-0 bottom-0 w-12 bg-linear-to-r from-background to-transparent z-10 pointer-events-none" />

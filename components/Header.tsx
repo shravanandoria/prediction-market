@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Search,
   Box,
@@ -8,6 +9,7 @@ import {
   Home,
   TrendingUp,
   MoreHorizontal,
+  Trophy,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -16,9 +18,12 @@ import { FeaturesNav } from "@/components/FeaturesNav";
 import { CryptoFilters } from "@/components/CryptoFilters";
 
 export function Header() {
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
+
   return (
     <>
-      <header className="top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-14 items-center px-4">
           {/* Logo - Always visible */}
           <Link href="/" className="flex items-center gap-2 mr-4">
@@ -44,6 +49,13 @@ export function Header() {
           {/* Desktop Navigation - Hidden on mobile */}
           <nav className="hidden md:flex items-center space-x-2 lg:space-x-4 ml-auto">
             <Link
+              href="/leaderboard"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary flex items-center gap-1 px-2"
+            >
+              <Trophy className="h-4 w-4" />
+              <span className="hidden lg:inline">Leaderboard</span>
+            </Link>
+            <Link
               href="#"
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary flex items-center gap-1 px-2"
             >
@@ -64,10 +76,10 @@ export function Header() {
       </header>
 
       {/* Horizontal Scrollable Features Navigation */}
-      <FeaturesNav />
+      {isHomePage && <FeaturesNav />}
 
       {/* Crypto Filters Navigation */}
-      <CryptoFilters />
+      {isHomePage && <CryptoFilters />}
 
       {/* Mobile Bottom Navigation Bar */}
       <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 pb-safe">

@@ -27,12 +27,6 @@ export default function Home() {
               </Badge>
             </div>
           </div>
-          <Link href="/leaderboard">
-            <Button className="flex items-center gap-2 bg-[#2563EB] hover:bg-[#1d4ed8] text-white">
-              <Trophy className="w-4 h-4" />
-              View Leaderboard
-            </Button>
-          </Link>
         </div>
 
         <Separator className="mb-6" />

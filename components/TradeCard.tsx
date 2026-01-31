@@ -18,6 +18,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Separator } from "@/components/ui/separator";
+import { useRouter } from "next/navigation";
 
 export interface TradeData {
   id: string;
@@ -52,6 +53,8 @@ interface TradeCardProps {
 }
 
 export function TradeCard({ data }: TradeCardProps) {
+  const router = useRouter();
+
   const formatCurrency = (amount: number) => {
     if (amount >= 1000) {
       return `$${(amount / 1000).toFixed(1)}k`;
@@ -63,8 +66,21 @@ export function TradeCard({ data }: TradeCardProps) {
     return `$${price.toLocaleString()}`;
   };
 
+  const handleCardClick = () => {
+    router.push(`/trade/${data.id}`);
+  };
+
+  const handleBetClick = (e: React.MouseEvent, outcome: "profit" | "loss") => {
+    e.stopPropagation();
+    // Navigate to details page with bet intent
+    router.push(`/trade/${data.id}?bet=${outcome}`);
+  };
+
   return (
-    <Card className="group relative hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 flex flex-col h-full">
+    <Card
+      className="group relative hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 flex flex-col h-full cursor-pointer"
+      onClick={handleCardClick}
+    >
       <CardHeader className="flex flex-row items-center justify-between space-y-0 ">
         <div className="flex items-center gap-3">
           <Avatar className="w-10 h-10 ring-2 ring-primary/20">
@@ -198,12 +214,14 @@ export function TradeCard({ data }: TradeCardProps) {
           <Button
             className="bg-green-500/10 hover:bg-green-500/20 text-green-500 border border-green-500/30 hover:border-green-500/50 font-semibold transition-all duration-200"
             variant="outline"
+            onClick={(e) => handleBetClick(e, "profit")}
           >
             Bet Profit
           </Button>
           <Button
             className="bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/30 hover:border-red-500/50 font-semibold transition-all duration-200"
             variant="outline"
+            onClick={(e) => handleBetClick(e, "loss")}
           >
             Bet Loss
           </Button>
