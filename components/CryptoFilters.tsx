@@ -1,8 +1,17 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { Filter, Search, ChevronDown } from "lucide-react";
+import { Filter, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
 
 const cryptoFilters = [
   { name: "All", active: true },
@@ -30,23 +39,18 @@ function FilterDropdown({
   onChange,
 }: FilterDropdownProps) {
   return (
-    <div className="relative inline-block">
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="appearance-none bg-secondary/50 hover:bg-secondary text-foreground text-sm font-medium px-3 py-1.5 pr-8 rounded-md border border-border/50 cursor-pointer transition-all duration-200 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-primary/50"
-      >
-        <option value="" disabled hidden>
-          {label}
-        </option>
+    <Select value={value} onValueChange={onChange}>
+      <SelectTrigger className="w-auto bg-secondary/50 hover:bg-secondary text-foreground text-sm font-medium px-3 py-1.5 border-border/50 whitespace-nowrap">
+        <SelectValue placeholder={label} />
+      </SelectTrigger>
+      <SelectContent>
         {options.map((option) => (
-          <option key={option} value={option}>
+          <SelectItem key={option} value={option}>
             {option === "All" ? label : option}
-          </option>
+          </SelectItem>
         ))}
-      </select>
-      <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
-    </div>
+      </SelectContent>
+    </Select>
   );
 }
 
