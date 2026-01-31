@@ -10,7 +10,7 @@ export default function Home() {
         {/* Page Title */}
         <div className="mb-6">
           <h1 className="text-2xl md:text-3xl font-bold text-foreground">
-            Active Predictions
+            Active Trades
           </h1>
           <p className="text-sm text-muted-foreground mt-1">
             {demoTradeData.length} live predictions from verified traders

@@ -13,7 +13,7 @@ const cryptoFilters = [
 
 const timeHorizons = ["All", "1h", "4h", "24h"];
 const traderQualities = ["All", "New", "Verified", "High Win %"];
-const frequencies = ["All", "Hourly", "Daily", "Weekly"];
+const expires = ["All", "Hourly", "Daily", "Weekly"];
 const statuses = ["All", "Active", "Inactive", "Pending"];
 
 interface FilterDropdownProps {
@@ -58,7 +58,7 @@ export function CryptoFilters() {
   const [showFilters, setShowFilters] = useState(true); // Default enabled
   const [timeHorizon, setTimeHorizon] = useState("All");
   const [traderQuality, setTraderQuality] = useState("All");
-  const [frequency, setFrequency] = useState("All");
+  const [Expiry, setExpiry] = useState("All");
   const [status, setStatus] = useState("All");
 
   const checkScroll = () => {
@@ -166,12 +166,12 @@ export function CryptoFilters() {
               onChange={setTraderQuality}
             />
 
-            {/* Frequency Filter */}
+            {/* Expiry Filter */}
             <FilterDropdown
-              label="Frequency"
-              options={frequencies}
-              value={frequency}
-              onChange={setFrequency}
+              label="Expiry"
+              options={expires}
+              value={Expiry}
+              onChange={setExpiry}
             />
 
             {/* Status Filter */}

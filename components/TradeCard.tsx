@@ -183,7 +183,7 @@ export function TradeCard({ data }: TradeCardProps) {
       </div>
 
       {/* Trader Skin-in-the-Game */}
-      <div className="px-4 pb-4">
+      <div className="px-4 pb-4 mt-auto">
         <div className="text-xs text-muted-foreground">
           Trader stake:{" "}
           <span className="font-bold text-foreground">
