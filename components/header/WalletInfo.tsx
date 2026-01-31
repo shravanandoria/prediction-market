@@ -11,7 +11,7 @@ interface WalletInfoProps {
   cashBalance: number;
   formatBalance: (value: number) => string;
   onAccountClick: () => void;
-  onDepositClick: () => void;
+  onDepositClick?: () => void;
 }
 
 export function WalletInfo({
